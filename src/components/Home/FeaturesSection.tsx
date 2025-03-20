@@ -1,5 +1,5 @@
 
-import { Brain, Workflow, LineChart, Clock, PresentationChart, Shield } from 'lucide-react';
+import { Brain, Workflow, LineChart, Clock, BarChart, Shield } from 'lucide-react';
 
 const features = [
   {
@@ -23,7 +23,7 @@ const features = [
     description: 'Reduza tempo e custos operacionais com processos otimizados e inteligentes.'
   },
   {
-    icon: <PresentationChart className="h-8 w-8 text-nexia-orange" />,
+    icon: <BarChart className="h-8 w-8 text-nexia-orange" />,
     title: 'Dashboards Personalizados',
     description: 'Visualize métricas importantes em tempo real com painéis intuitivos.'
   },
