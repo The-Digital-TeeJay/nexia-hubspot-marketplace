@@ -1,4 +1,3 @@
-
 import { ArrowRight, Bot, Zap, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useEffect, useRef, useState } from 'react';
@@ -607,59 +606,60 @@ const HeroSection = () => {
           <div className="relative flex justify-center items-center w-full">
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 md:w-96 h-64 md:h-96 bg-gradient-to-br from-nexia-orange to-nexia-blue rounded-full opacity-20 blur-3xl animate-pulse-slow"></div>
             
-            {/* Feature cards - centered and with parallax effect */}
-            <div 
-              className="relative w-[95%] md:w-[85%] mx-auto animate-float"
-              style={{ 
-                transform: `translateY(${-scrollY * 0.1}px)` // Reverse parallax effect for floating
-              }}
-            >
-              {/* Updated background with more harmonious gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-nexia-orange/30 to-white/60 rounded-2xl -z-10"></div>
-              
-              <div className="space-y-4 md:space-y-8">
-                <div className="p-4 md:p-8 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-sm hover:shadow-md transition-all">
-                  <div className="flex items-center space-x-4 md:space-x-6">
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-orange/10 flex items-center justify-center">
-                      <Bot className="h-6 w-6 md:h-8 md:w-8 text-nexia-orange" />
-                    </div>
-                    <div>
-                      <h4 className={`font-medium text-lg md:text-xl ${isMobile ? 'text-white' : 'text-gray-800'}`}>Assistente IA</h4>
-                      <p className={`text-sm md:text-base ${isMobile ? 'text-white/90' : 'text-gray-600'}`}>Automação inteligente com aprendizado contínuo</p>
+            {/* Feature cards - revised layout to match first version for desktop, keep mobile improvements */}
+            {isMobile ? (
+              // Mobile version with space between cards
+              <div 
+                className="relative w-[95%] md:w-[85%] mx-auto animate-float"
+                style={{ 
+                  transform: `translateY(${-scrollY * 0.1}px)` // Reverse parallax effect for floating
+                }}
+              >
+                {/* Updated background with more harmonious gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-nexia-orange/30 to-white/60 rounded-2xl -z-10"></div>
+                
+                <div className="space-y-4 md:space-y-8">
+                  <div className="p-4 md:p-8 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-sm hover:shadow-md transition-all">
+                    <div className="flex items-center space-x-4 md:space-x-6">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-orange/10 flex items-center justify-center">
+                        <Bot className="h-6 w-6 md:h-8 md:w-8 text-nexia-orange" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-lg md:text-xl text-white">Assistente IA</h4>
+                        <p className="text-sm md:text-base text-white/90">Automação inteligente com aprendizado contínuo</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                
-                <div className="p-4 md:p-8 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-sm hover:shadow-md transition-all">
-                  <div className="flex items-center space-x-4 md:space-x-6">
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-blue/10 flex items-center justify-center">
-                      <Zap className="h-6 w-6 md:h-8 md:w-8 text-nexia-blue" />
-                    </div>
-                    <div>
-                      <h4 className={`font-medium text-lg md:text-xl ${isMobile ? 'text-white' : 'text-gray-800'}`}>Workflow Otimizado</h4>
-                      <p className={`text-sm md:text-base ${isMobile ? 'text-white/90' : 'text-gray-600'}`}>Processos eficientes e personalizados</p>
+                  
+                  <div className="p-4 md:p-8 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-sm hover:shadow-md transition-all">
+                    <div className="flex items-center space-x-4 md:space-x-6">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-blue/10 flex items-center justify-center">
+                        <Zap className="h-6 w-6 md:h-8 md:w-8 text-nexia-blue" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-lg md:text-xl text-white">Workflow Otimizado</h4>
+                        <p className="text-sm md:text-base text-white/90">Processos eficientes e personalizados</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                
-                <div className="p-4 md:p-8 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-sm hover:shadow-md transition-all">
-                  <div className="flex items-center space-x-4 md:space-x-6">
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-orange/10 flex items-center justify-center">
-                      <BarChart className="h-6 w-6 md:h-8 md:w-8 text-nexia-orange" />
-                    </div>
-                    <div>
-                      <h4 className={`font-medium text-lg md:text-xl ${isMobile ? 'text-white' : 'text-gray-800'}`}>Análise de Dados</h4>
-                      <p className={`text-sm md:text-base ${isMobile ? 'text-white/90' : 'text-gray-600'}`}>Insights valiosos e métricas precisas</p>
+                  
+                  <div className="p-4 md:p-8 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-sm hover:shadow-md transition-all">
+                    <div className="flex items-center space-x-4 md:space-x-6">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-orange/10 flex items-center justify-center">
+                        <BarChart className="h-6 w-6 md:h-8 md:w-8 text-nexia-orange" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-lg md:text-xl text-white">Análise de Dados</h4>
+                        <p className="text-sm md:text-base text-white/90">Insights valiosos e métricas precisas</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default HeroSection;
+            ) : (
+              // Desktop version restored to original layout
+              <div className="relative w-full">
+                <div className="p-4 md:p-6 space-y-4">
+                  <div className="p-4 md:p-6 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-sm hover:shadow-md transition-all">
+                    <div className="flex items-center space-x-4 md:space-x-6">
+                      <div className="w-12 h-12 md:
