@@ -12,10 +12,16 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 
+// Define the message type explicitly
+type Message = {
+  role: 'user' | 'assistant';
+  content: string;
+};
+
 const AiAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
-  const [conversation, setConversation] = useState<{ role: 'user' | 'assistant'; content: string }[]>([
+  const [conversation, setConversation] = useState<Message[]>([
     {
       role: 'assistant',
       content: 'Olá! Sou a assistente virtual da Nexia. Como posso ajudar você com soluções de automação e inteligência artificial hoje?'
@@ -26,8 +32,8 @@ const AiAssistant = () => {
   const handleSendMessage = () => {
     if (!message.trim()) return;
 
-    // Adicionar mensagem do usuário
-    const updatedConversation = [
+    // Adicionar mensagem do usuário com tipo correto
+    const updatedConversation: Message[] = [
       ...conversation,
       { role: 'user', content: message }
     ];
