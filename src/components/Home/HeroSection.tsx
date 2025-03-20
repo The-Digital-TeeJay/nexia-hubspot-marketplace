@@ -1,3 +1,4 @@
+
 import { ArrowRight, Bot, Zap, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useEffect, useRef, useState } from 'react';
@@ -623,8 +624,8 @@ const HeroSection = () => {
                       <Bot className="h-6 w-6 md:h-8 md:w-8 text-nexia-orange" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-lg md:text-xl text-foreground">Assistente IA</h4>
-                      <p className="text-sm md:text-base text-muted-foreground">Automação inteligente com aprendizado contínuo</p>
+                      <h4 className={`font-medium text-lg md:text-xl ${isMobile ? 'text-white' : 'text-gray-800'}`}>Assistente IA</h4>
+                      <p className={`text-sm md:text-base ${isMobile ? 'text-white/90' : 'text-gray-600'}`}>Automação inteligente com aprendizado contínuo</p>
                     </div>
                   </div>
                 </div>
@@ -635,8 +636,8 @@ const HeroSection = () => {
                       <Zap className="h-6 w-6 md:h-8 md:w-8 text-nexia-blue" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-lg md:text-xl text-foreground">Workflow Otimizado</h4>
-                      <p className="text-sm md:text-base text-muted-foreground">Processos eficientes e personalizados</p>
+                      <h4 className={`font-medium text-lg md:text-xl ${isMobile ? 'text-white' : 'text-gray-800'}`}>Workflow Otimizado</h4>
+                      <p className={`text-sm md:text-base ${isMobile ? 'text-white/90' : 'text-gray-600'}`}>Processos eficientes e personalizados</p>
                     </div>
                   </div>
                 </div>
@@ -647,8 +648,8 @@ const HeroSection = () => {
                       <BarChart className="h-6 w-6 md:h-8 md:w-8 text-nexia-orange" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-lg md:text-xl text-foreground">Análise de Dados</h4>
-                      <p className="text-sm md:text-base text-muted-foreground">Insights valiosos e métricas precisas</p>
+                      <h4 className={`font-medium text-lg md:text-xl ${isMobile ? 'text-white' : 'text-gray-800'}`}>Análise de Dados</h4>
+                      <p className={`text-sm md:text-base ${isMobile ? 'text-white/90' : 'text-gray-600'}`}>Insights valiosos e métricas precisas</p>
                     </div>
                   </div>
                 </div>
