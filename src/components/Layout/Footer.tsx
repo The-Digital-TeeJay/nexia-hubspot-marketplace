@@ -85,15 +85,19 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <MapPin className="mr-3 h-5 w-5 text-nexia-orange shrink-0" />
-                <span className="text-gray-300">Av. Paulista, 1000, São Paulo, SP</span>
+                <span className="text-gray-300">Próximo a Limeira, SP</span>
               </li>
               <li className="flex items-center">
                 <PhoneCall className="mr-3 h-5 w-5 text-nexia-orange shrink-0" />
-                <span className="text-gray-300">+55 (11) 3000-0000</span>
+                <span className="text-gray-300">+55 (19) 9 9988-5889</span>
+              </li>
+              <li className="flex items-center">
+                <PhoneCall className="mr-3 h-5 w-5 text-nexia-orange shrink-0" />
+                <span className="text-gray-300">+55 (19) 9 9733-9377</span>
               </li>
               <li className="flex items-center">
                 <Mail className="mr-3 h-5 w-5 text-nexia-orange shrink-0" />
-                <span className="text-gray-300">contato@nexia.com.br</span>
+                <span className="text-gray-300">contato@nexiabr.com</span>
               </li>
             </ul>
           </div>
