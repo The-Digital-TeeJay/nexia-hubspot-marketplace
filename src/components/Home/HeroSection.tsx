@@ -662,4 +662,47 @@ const HeroSection = () => {
                 <div className="p-4 md:p-6 space-y-4">
                   <div className="p-4 md:p-6 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-sm hover:shadow-md transition-all">
                     <div className="flex items-center space-x-4 md:space-x-6">
-                      <div className="w-12 h-12 md:w-16 md:h-16
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-orange/10 flex items-center justify-center">
+                        <Bot className="h-6 w-6 md:h-8 md:w-8 text-nexia-orange" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-lg md:text-xl text-gray-800">Assistente IA</h4>
+                        <p className="text-sm md:text-base text-gray-600">Automação inteligente com aprendizado contínuo</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="p-4 md:p-6 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-sm hover:shadow-md transition-all">
+                    <div className="flex items-center space-x-4 md:space-x-6">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-blue/10 flex items-center justify-center">
+                        <Zap className="h-6 w-6 md:h-8 md:w-8 text-nexia-blue" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-lg md:text-xl text-gray-800">Workflow Otimizado</h4>
+                        <p className="text-sm md:text-base text-gray-600">Processos eficientes e personalizados</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="p-4 md:p-6 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-sm hover:shadow-md transition-all">
+                    <div className="flex items-center space-x-4 md:space-x-6">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-orange/10 flex items-center justify-center">
+                        <BarChart className="h-6 w-6 md:h-8 md:w-8 text-nexia-orange" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-lg md:text-xl text-gray-800">Análise de Dados</h4>
+                        <p className="text-sm md:text-base text-gray-600">Insights valiosos e métricas precisas</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default HeroSection;
