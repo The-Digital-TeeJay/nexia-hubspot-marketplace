@@ -7,6 +7,7 @@ import TestimonialsSection from '../components/Home/TestimonialsSection';
 import BlogPreviewSection from '../components/Home/BlogPreviewSection';
 import MarketplacePreviewSection from '../components/Home/MarketplacePreviewSection';
 import CtaSection from '../components/Home/CtaSection';
+import AiAssistant from '../components/AiAssistant/AiAssistant';
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
       <BlogPreviewSection />
       <MarketplacePreviewSection />
       <CtaSection />
+      <AiAssistant />
     </MainLayout>
   );
 };

@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import NexiaLogo from '../NexiaLogo';
 
@@ -28,12 +28,12 @@ const Header = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'py-3 bg-white/80 backdrop-blur-md shadow-sm' : 'py-5 bg-transparent'
+        isScrolled ? 'py-3 bg-white/90 backdrop-blur-md shadow-sm' : 'py-5 bg-transparent'
       }`}
     >
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center">
-          <NexiaLogo className="h-8 w-auto" />
+          <NexiaLogo className="h-10 w-auto" />
         </Link>
         
         {/* Desktop Navigation */}
@@ -62,11 +62,20 @@ const Header = () => {
           >
             Marketplace
           </Link>
-          <Button 
-            className="ml-4 bg-gradient-to-r from-nexia-orange to-nexia-blue text-white hover:opacity-90 transition-opacity"
-          >
-            Contato
-          </Button>
+          <div className="flex items-center gap-4">
+            <Button 
+              variant="ghost"
+              className="flex items-center gap-2 text-nexia-blue hover:text-nexia-orange transition-colors"
+            >
+              <MessageCircle className="h-4 w-4" />
+              Fale com o Time
+            </Button>
+            <Button 
+              className="bg-gradient-to-r from-nexia-orange to-nexia-blue text-white hover:opacity-90 transition-opacity"
+            >
+              Contato
+            </Button>
+          </div>
         </nav>
         
         {/* Mobile Menu Button */}
@@ -111,11 +120,20 @@ const Header = () => {
             >
               Marketplace
             </Link>
-            <Button 
-              className="m-4 bg-gradient-to-r from-nexia-orange to-nexia-blue text-white hover:opacity-90 transition-opacity"
-            >
-              Contato
-            </Button>
+            <div className="flex flex-col gap-2 p-4">
+              <Button 
+                variant="ghost"
+                className="flex items-center justify-start gap-2 text-nexia-blue hover:text-nexia-orange transition-colors w-full"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Fale com o Time
+              </Button>
+              <Button 
+                className="w-full bg-gradient-to-r from-nexia-orange to-nexia-blue text-white hover:opacity-90 transition-opacity"
+              >
+                Contato
+              </Button>
+            </div>
           </div>
         </div>
       )}
