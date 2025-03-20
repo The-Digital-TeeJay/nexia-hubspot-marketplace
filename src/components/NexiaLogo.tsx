@@ -5,7 +5,7 @@ interface NexiaLogoProps {
   className?: string;
 }
 
-const NexiaLogo: React.FC<NexiaLogoProps> = ({ className = "h-24 w-auto" }) => {
+const NexiaLogo: React.FC<NexiaLogoProps> = ({ className = "h-32 w-auto" }) => {
   return (
     <div className={`flex items-center ${className}`}>
       <img 

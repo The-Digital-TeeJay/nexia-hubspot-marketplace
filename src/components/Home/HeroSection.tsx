@@ -1,10 +1,21 @@
 
 import { ArrowRight, Bot, Zap, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const HeroSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [scrollY, setScrollY] = useState(0);
+
+  // Track scroll position for parallax effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Enhanced n8n workflow animation
   useEffect(() => {
@@ -39,7 +50,7 @@ const HeroSection = () => {
       status: 'idle' | 'active' | 'success' | 'error';
       processingTime: number;
       totalProcessingTime: number;
-      iconType: 'function' | 'data' | 'trigger' | 'api';
+      iconType: 'function' | 'data' | 'trigger' | 'api' | 'filter' | 'transformer' | 'notification';
       
       constructor(
         x: number, 
@@ -48,7 +59,7 @@ const HeroSection = () => {
         height: number, 
         color: string, 
         label: string,
-        iconType: 'function' | 'data' | 'trigger' | 'api'
+        iconType: 'function' | 'data' | 'trigger' | 'api' | 'filter' | 'transformer' | 'notification'
       ) {
         this.x = x;
         this.y = y;
@@ -162,6 +173,57 @@ const HeroSection = () => {
             
             ctx.lineWidth = 3;
             ctx.strokeStyle = this.color;
+            ctx.stroke();
+            break;
+
+          case 'filter':
+            // Draw filter funnel icon
+            ctx.beginPath();
+            ctx.moveTo(-size/2, -size/2);
+            ctx.lineTo(size/2, -size/2);
+            ctx.lineTo(size/4, size/4);
+            ctx.lineTo(size/4, size/2);
+            ctx.lineTo(-size/4, size/2);
+            ctx.lineTo(-size/4, size/4);
+            ctx.closePath();
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            break;
+
+          case 'transformer':
+            // Draw transformer/gear icon
+            ctx.beginPath();
+            ctx.arc(0, 0, size/2, 0, Math.PI * 2);
+            ctx.strokeStyle = this.color;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Draw gear teeth
+            for (let i = 0; i < 8; i++) {
+              const angle = (i / 8) * Math.PI * 2;
+              ctx.beginPath();
+              ctx.moveTo(
+                (size/2) * Math.cos(angle),
+                (size/2) * Math.sin(angle)
+              );
+              ctx.lineTo(
+                (size/2 + 5) * Math.cos(angle),
+                (size/2 + 5) * Math.sin(angle)
+              );
+              ctx.stroke();
+            }
+            break;
+
+          case 'notification':
+            // Draw bell icon
+            ctx.beginPath();
+            ctx.arc(0, size/2, size/4, 0, Math.PI, true);
+            ctx.moveTo(-size/4, size/2);
+            ctx.lineTo(-size/3, -size/3);
+            ctx.arc(0, -size/3, size/3, Math.PI, 0, false);
+            ctx.lineTo(size/4, size/2);
+            ctx.strokeStyle = this.color;
+            ctx.lineWidth = 2;
             ctx.stroke();
             break;
         }
@@ -302,33 +364,62 @@ const HeroSection = () => {
     
     // Create workflow diagram
     const nodeColors = {
-      trigger: '#F97316',  // Nexia Orange
-      function: '#1E3A8A', // Nexia Blue
-      api: '#8B5CF6',      // Purple
-      data: '#10B981'      // Green
+      trigger: '#F97316',   // Nexia Orange
+      function: '#1E3A8A',  // Nexia Blue
+      api: '#8B5CF6',       // Purple
+      data: '#10B981',      // Green
+      filter: '#F59E0B',    // Amber
+      transformer: '#3B82F6', // Blue
+      notification: '#EC4899' // Pink
     };
     
-    // Create nodes in a structured workflow pattern
+    // Create an expanded network of nodes in multiple branches
     const nodes: WorkflowNode[] = [
-      new WorkflowNode(100, 120, 140, 70, nodeColors.trigger, 'Trigger', 'trigger'),
-      new WorkflowNode(300, 80, 140, 70, nodeColors.function, 'Processar Dados', 'function'),
-      new WorkflowNode(300, 180, 140, 70, nodeColors.api, 'API Request', 'api'),
-      new WorkflowNode(500, 50, 140, 70, nodeColors.data, 'Banco de Dados', 'data'),
-      new WorkflowNode(500, 150, 140, 70, nodeColors.function, 'Transformar', 'function'),
-      new WorkflowNode(500, 250, 140, 70, nodeColors.api, 'Webhook', 'api'),
-      new WorkflowNode(700, 100, 140, 70, nodeColors.function, 'Enviar Email', 'function'),
-      new WorkflowNode(700, 200, 140, 70, nodeColors.data, 'Salvar Resultado', 'data')
+      // Main trigger and initial branches
+      new WorkflowNode(50, 120, 140, 70, nodeColors.trigger, 'Evento Inicial', 'trigger'),
+      new WorkflowNode(250, 50, 140, 70, nodeColors.function, 'Validar Dados', 'function'),
+      new WorkflowNode(250, 180, 140, 70, nodeColors.api, 'API Request', 'api'),
+      
+      // Top branch nodes
+      new WorkflowNode(450, 20, 140, 70, nodeColors.filter, 'Filtrar Dados', 'filter'),
+      new WorkflowNode(450, 120, 140, 70, nodeColors.data, 'Banco de Dados', 'data'),
+      
+      // Middle branch nodes
+      new WorkflowNode(450, 220, 140, 70, nodeColors.transformer, 'Transformar', 'transformer'),
+      new WorkflowNode(650, 70, 140, 70, nodeColors.function, 'Análise', 'function'),
+      
+      // Bottom branch nodes
+      new WorkflowNode(650, 170, 140, 70, nodeColors.notification, 'Notificação', 'notification'),
+      new WorkflowNode(650, 270, 140, 70, nodeColors.api, 'Webhook', 'api'),
+      
+      // Final integration nodes
+      new WorkflowNode(850, 120, 140, 70, nodeColors.function, 'Integração', 'function'),
+      new WorkflowNode(850, 220, 140, 70, nodeColors.data, 'Armazenar', 'data')
     ];
     
-    // Create connections between nodes to form workflow
-    nodes[0].connect(nodes[1]);
-    nodes[0].connect(nodes[2]);
-    nodes[1].connect(nodes[3]);
-    nodes[1].connect(nodes[4]);
-    nodes[2].connect(nodes[5]);
-    nodes[4].connect(nodes[6]);
-    nodes[5].connect(nodes[6]);
-    nodes[6].connect(nodes[7]);
+    // Create a more complex network of connections
+    // Initial connections
+    nodes[0].connect(nodes[1]); // Trigger -> Validate
+    nodes[0].connect(nodes[2]); // Trigger -> API Request
+    
+    // Top branch
+    nodes[1].connect(nodes[3]); // Validate -> Filter
+    nodes[1].connect(nodes[4]); // Validate -> Database
+    
+    // Middle branch
+    nodes[2].connect(nodes[5]); // API Request -> Transform
+    nodes[3].connect(nodes[6]); // Filter -> Analysis
+    nodes[4].connect(nodes[6]); // Database -> Analysis
+    
+    // Bottom branch
+    nodes[5].connect(nodes[7]); // Transform -> Notification
+    nodes[5].connect(nodes[8]); // Transform -> Webhook
+    
+    // Final integration
+    nodes[6].connect(nodes[9]); // Analysis -> Integration
+    nodes[7].connect(nodes[9]); // Notification -> Integration
+    nodes[8].connect(nodes[10]); // Webhook -> Store
+    nodes[9].connect(nodes[10]); // Integration -> Store
     
     // Start animation with trigger node
     nodes[0].activate();
@@ -371,6 +462,9 @@ const HeroSection = () => {
       <canvas 
         ref={canvasRef} 
         className="absolute inset-0 -z-10" 
+        style={{ 
+          transform: `translateY(${scrollY * 0.2}px)` // Parallax effect on workflow animation
+        }} 
       />
       
       {/* Gradient overlay for better text readability */}
@@ -420,11 +514,16 @@ const HeroSection = () => {
             </div>
           </div>
           
-          <div className="relative hidden lg:block">
+          <div className="relative flex justify-center items-center w-full">
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-nexia-orange to-nexia-blue rounded-full opacity-20 blur-3xl animate-pulse-slow"></div>
             
-            {/* Feature cards - enlarged */}
-            <div className="relative glass-card p-10 w-full mx-auto animate-float">
+            {/* Feature cards - centered and with parallax effect */}
+            <div 
+              className="relative glass-card p-10 w-[85%] mx-auto animate-float"
+              style={{ 
+                transform: `translateY(${-scrollY * 0.1}px)` // Reverse parallax effect for floating
+              }}
+            >
               <div className="absolute inset-0 bg-gradient-to-br from-nexia-orange/10 to-nexia-blue/10 rounded-2xl -z-10"></div>
               
               <div className="space-y-8">
