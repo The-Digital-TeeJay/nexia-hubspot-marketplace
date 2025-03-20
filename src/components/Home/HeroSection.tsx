@@ -1,4 +1,3 @@
-
 import { ArrowRight, Bot, Zap, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useEffect, useRef, useState } from 'react';
@@ -370,10 +369,11 @@ const HeroSection = () => {
       data: '#10B981',      // Green
       filter: '#F59E0B',    // Amber
       transformer: '#3B82F6', // Blue
-      notification: '#EC4899' // Pink
+      notification: '#EC4899', // Pink
+      connector: '#64748B'     // Slate
     };
     
-    // Create an expanded network of nodes in multiple branches
+    // Create an expanded network of nodes in multiple branches with more nodes
     const nodes: WorkflowNode[] = [
       // Main trigger and initial branches
       new WorkflowNode(50, 120, 140, 70, nodeColors.trigger, 'Evento Inicial', 'trigger'),
@@ -394,7 +394,25 @@ const HeroSection = () => {
       
       // Final integration nodes
       new WorkflowNode(850, 120, 140, 70, nodeColors.function, 'Integração', 'function'),
-      new WorkflowNode(850, 220, 140, 70, nodeColors.data, 'Armazenar', 'data')
+      new WorkflowNode(850, 220, 140, 70, nodeColors.data, 'Armazenar', 'data'),
+      
+      // NEW: Extended branches going down
+      new WorkflowNode(450, 320, 140, 70, nodeColors.connector, 'Conectar API', 'api'),
+      new WorkflowNode(450, 420, 140, 70, nodeColors.function, 'Processar JSON', 'function'),
+      new WorkflowNode(650, 370, 140, 70, nodeColors.data, 'Armazenar Cache', 'data'),
+      new WorkflowNode(850, 320, 140, 70, nodeColors.transformer, 'Transformar Dados', 'transformer'),
+      new WorkflowNode(850, 420, 140, 70, nodeColors.notification, 'Alerta', 'notification'),
+      
+      // NEW: Deep-level processing branch
+      new WorkflowNode(250, 320, 140, 70, nodeColors.filter, 'Filtrar Erros', 'filter'),
+      new WorkflowNode(250, 420, 140, 70, nodeColors.function, 'Correção Auto', 'function'),
+      new WorkflowNode(50, 370, 140, 70, nodeColors.api, 'Chamar IA', 'api'),
+      
+      // NEW: Bottom level integration
+      new WorkflowNode(650, 470, 140, 70, nodeColors.function, 'Análise Final', 'function'),
+      new WorkflowNode(850, 520, 140, 70, nodeColors.data, 'Relatório', 'data'),
+      new WorkflowNode(450, 520, 140, 70, nodeColors.notification, 'Notificação Email', 'notification'),
+      new WorkflowNode(250, 520, 140, 70, nodeColors.api, 'Webhook Final', 'api')
     ];
     
     // Create a more complex network of connections
@@ -420,6 +438,26 @@ const HeroSection = () => {
     nodes[7].connect(nodes[9]); // Notification -> Integration
     nodes[8].connect(nodes[10]); // Webhook -> Store
     nodes[9].connect(nodes[10]); // Integration -> Store
+    
+    // NEW: Additional connections for extended workflow
+    nodes[5].connect(nodes[11]); // Transform -> Connect API
+    nodes[11].connect(nodes[12]); // Connect API -> Process JSON
+    nodes[12].connect(nodes[13]); // Process JSON -> Store Cache
+    nodes[13].connect(nodes[14]); // Store Cache -> Transform Data
+    nodes[14].connect(nodes[15]); // Transform Data -> Alert
+    
+    // NEW: Connections for deep-level processing branch
+    nodes[2].connect(nodes[16]); // API Request -> Filter Errors
+    nodes[16].connect(nodes[17]); // Filter Errors -> Auto Fix
+    nodes[17].connect(nodes[18]); // Auto Fix -> Call AI
+    
+    // NEW: More complex integrations
+    nodes[15].connect(nodes[19]); // Alert -> Final Analysis
+    nodes[19].connect(nodes[20]); // Final Analysis -> Report
+    nodes[14].connect(nodes[21]); // Transform Data -> Email Notification
+    nodes[21].connect(nodes[22]); // Email Notification -> Final Webhook
+    nodes[18].connect(nodes[22]); // Call AI -> Final Webhook
+    nodes[17].connect(nodes[12]); // Auto Fix -> Process JSON (creating a loop)
     
     // Start animation with trigger node
     nodes[0].activate();

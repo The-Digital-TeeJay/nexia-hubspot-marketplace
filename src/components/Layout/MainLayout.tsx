@@ -11,7 +11,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow pt-14">
+      <main className="flex-grow pt-12">
         {children}
       </main>
       <Footer />
