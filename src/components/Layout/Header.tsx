@@ -1,13 +1,16 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import NexiaLogo from '../NexiaLogo';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -31,7 +34,7 @@ const Header = () => {
     >
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-12">
         <Link to="/" className="flex items-center">
-          <NexiaLogo className="h-36 md:h-36 w-auto" />
+          <NexiaLogo className={`${isMobile ? 'h-28' : 'h-36'} w-auto`} />
         </Link>
         
         {/* Desktop Navigation */}
@@ -117,7 +120,7 @@ const Header = () => {
       
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg py-2 animate-fade-in">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg py-2 animate-fade-in z-50">
           <div className="container flex flex-col space-y-2">
             <Link 
               to="/" 
