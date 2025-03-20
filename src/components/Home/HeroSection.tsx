@@ -465,7 +465,7 @@ const HeroSection = () => {
         new WorkflowNode(250, 520, 140, 70, nodeColors.api, 'Webhook Final', 'api')
       ];
       
-      // Create desktop connections - keep existing connections
+      // Create desktop connections
       // Initial connections
       nodes[0].connect(nodes[1]); // Trigger -> Validate
       nodes[0].connect(nodes[2]); // Trigger -> API Request
@@ -489,19 +489,19 @@ const HeroSection = () => {
       nodes[8].connect(nodes[10]); // Webhook -> Store
       nodes[9].connect(nodes[10]); // Integration -> Store
       
-      // NEW: Additional connections for extended workflow
+      // Additional connections for extended workflow
       nodes[5].connect(nodes[11]); // Transform -> Connect API
       nodes[11].connect(nodes[12]); // Connect API -> Process JSON
       nodes[12].connect(nodes[13]); // Process JSON -> Store Cache
       nodes[13].connect(nodes[14]); // Store Cache -> Transform Data
       nodes[14].connect(nodes[15]); // Transform Data -> Alert
       
-      // NEW: Connections for deep-level processing branch
+      // Connections for deep-level processing branch
       nodes[2].connect(nodes[16]); // API Request -> Filter Errors
       nodes[16].connect(nodes[17]); // Filter Errors -> Auto Fix
       nodes[17].connect(nodes[18]); // Auto Fix -> Call AI
       
-      // NEW: More complex integrations
+      // More complex integrations
       nodes[15].connect(nodes[19]); // Alert -> Final Analysis
       nodes[19].connect(nodes[20]); // Final Analysis -> Report
       nodes[14].connect(nodes[21]); // Transform Data -> Email Notification
@@ -662,4 +662,4 @@ const HeroSection = () => {
                 <div className="p-4 md:p-6 space-y-4">
                   <div className="p-4 md:p-6 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-sm hover:shadow-md transition-all">
                     <div className="flex items-center space-x-4 md:space-x-6">
-                      <div className="w-12 h-12 md:
+                      <div className="w-12 h-12 md:w-16 md:h-16
