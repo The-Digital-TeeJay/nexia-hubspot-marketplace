@@ -28,12 +28,12 @@ const Header = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'py-3 bg-white/90 backdrop-blur-md shadow-sm' : 'py-4 bg-transparent'
+        isScrolled ? 'py-2 bg-white/90 backdrop-blur-md shadow-sm' : 'py-3 bg-transparent'
       }`}
     >
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center">
-          <NexiaLogo className="h-14 md:h-16 w-auto" />
+          <NexiaLogo className={`${isScrolled ? 'h-16 md:h-18' : 'h-20 md:h-24'} w-auto transition-all duration-300`} />
         </Link>
         
         {/* Desktop Navigation */}
