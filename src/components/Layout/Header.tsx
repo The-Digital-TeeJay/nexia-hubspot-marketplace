@@ -28,54 +28,57 @@ const Header = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'py-3 bg-white/90 backdrop-blur-md shadow-sm' : 'py-5 bg-transparent'
+        isScrolled ? 'py-3 bg-white/90 backdrop-blur-md shadow-sm' : 'py-4 bg-transparent'
       }`}
     >
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center">
-          <NexiaLogo className="h-10 w-auto" />
+          <NexiaLogo className="h-14 md:h-16 w-auto" />
         </Link>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           <Link 
             to="/" 
-            className={`relative group overflow-hidden font-medium transition-all duration-300 hover:text-nexia-orange ${
-              isActive('/') ? 'text-nexia-orange' : 'text-foreground'
-            }`}
+            className={`relative group overflow-hidden font-medium transition-all duration-300`}
           >
-            <span className="relative z-10 px-4 py-2">Home</span>
-            <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange/10 to-nexia-blue/10 
-                             transform transition-transform duration-300 group-hover:scale-110 -z-0
-                             ${isActive('/') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></span>
-            <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-nexia-orange to-nexia-blue
-                           transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+            <span className={`relative z-10 px-6 py-3 rounded-lg block ${
+              isActive('/') ? 'text-white' : 'text-foreground hover:text-white'
+            }`}>Home</span>
+            <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange to-nexia-blue 
+                             transform transition-all duration-500 ${
+                               isActive('/') 
+                                 ? 'opacity-100' 
+                                 : 'opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100'
+                             }`}></span>
           </Link>
           <Link 
             to="/blog" 
-            className={`relative group overflow-hidden font-medium transition-all duration-300 hover:text-nexia-orange ${
-              isActive('/blog') ? 'text-nexia-orange' : 'text-foreground'
-            }`}
+            className={`relative group overflow-hidden font-medium transition-all duration-300`}
           >
-            <span className="relative z-10 px-4 py-2">Blog</span>
-            <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange/10 to-nexia-blue/10 
-                             transform transition-transform duration-300 group-hover:scale-110 -z-0
-                             ${isActive('/blog') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></span>
-            <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-nexia-orange to-nexia-blue
-                           transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+            <span className={`relative z-10 px-6 py-3 rounded-lg block ${
+              isActive('/blog') ? 'text-white' : 'text-foreground hover:text-white'
+            }`}>Blog</span>
+            <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange to-nexia-blue 
+                             transform transition-all duration-500 ${
+                               isActive('/blog') 
+                                 ? 'opacity-100' 
+                                 : 'opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100'
+                             }`}></span>
           </Link>
           <Link 
             to="/marketplace" 
-            className={`relative group overflow-hidden font-medium transition-all duration-300 hover:text-nexia-orange ${
-              isActive('/marketplace') ? 'text-nexia-orange' : 'text-foreground'
-            }`}
+            className={`relative group overflow-hidden font-medium transition-all duration-300`}
           >
-            <span className="relative z-10 px-4 py-2">Marketplace</span>
-            <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange/10 to-nexia-blue/10 
-                             transform transition-transform duration-300 group-hover:scale-110 -z-0
-                             ${isActive('/marketplace') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></span>
-            <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-nexia-orange to-nexia-blue
-                           transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+            <span className={`relative z-10 px-6 py-3 rounded-lg block ${
+              isActive('/marketplace') ? 'text-white' : 'text-foreground hover:text-white'
+            }`}>Marketplace</span>
+            <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange to-nexia-blue 
+                             transform transition-all duration-500 ${
+                               isActive('/marketplace') 
+                                 ? 'opacity-100' 
+                                 : 'opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100'
+                             }`}></span>
           </Link>
           <div className="flex items-center gap-4">
             <Button 
@@ -113,36 +116,39 @@ const Header = () => {
           <div className="container flex flex-col space-y-4">
             <Link 
               to="/" 
-              className={`font-medium px-4 py-2 rounded-lg relative overflow-hidden group ${
-                isActive('/') ? 'bg-gradient-to-r from-nexia-orange/20 to-nexia-blue/20 text-nexia-orange' : 'text-foreground'
+              className={`font-medium px-4 py-3 rounded-lg relative overflow-hidden group ${
+                isActive('/') ? 'bg-gradient-to-r from-nexia-orange to-nexia-blue text-white' : 'text-foreground'
               }`}
             >
               <span className="relative z-10">Home</span>
-              <span className={`absolute inset-0 bg-gradient-to-r from-nexia-orange/10 to-nexia-blue/10 
-                              transform transition-transform duration-300 group-hover:scale-105 -z-0
-                              ${isActive('/') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></span>
+              <span className={`absolute inset-0 bg-gradient-to-r from-nexia-orange to-nexia-blue 
+                              transform transition-transform duration-300 ${
+                                isActive('/') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                              }`}></span>
             </Link>
             <Link 
               to="/blog" 
-              className={`font-medium px-4 py-2 rounded-lg relative overflow-hidden group ${
-                isActive('/blog') ? 'bg-gradient-to-r from-nexia-orange/20 to-nexia-blue/20 text-nexia-orange' : 'text-foreground'
+              className={`font-medium px-4 py-3 rounded-lg relative overflow-hidden group ${
+                isActive('/blog') ? 'bg-gradient-to-r from-nexia-orange to-nexia-blue text-white' : 'text-foreground'
               }`}
             >
               <span className="relative z-10">Blog</span>
-              <span className={`absolute inset-0 bg-gradient-to-r from-nexia-orange/10 to-nexia-blue/10 
-                              transform transition-transform duration-300 group-hover:scale-105 -z-0
-                              ${isActive('/blog') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></span>
+              <span className={`absolute inset-0 bg-gradient-to-r from-nexia-orange to-nexia-blue 
+                              transform transition-transform duration-300 ${
+                                isActive('/blog') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                              }`}></span>
             </Link>
             <Link 
               to="/marketplace" 
-              className={`font-medium px-4 py-2 rounded-lg relative overflow-hidden group ${
-                isActive('/marketplace') ? 'bg-gradient-to-r from-nexia-orange/20 to-nexia-blue/20 text-nexia-orange' : 'text-foreground'
+              className={`font-medium px-4 py-3 rounded-lg relative overflow-hidden group ${
+                isActive('/marketplace') ? 'bg-gradient-to-r from-nexia-orange to-nexia-blue text-white' : 'text-foreground'
               }`}
             >
               <span className="relative z-10">Marketplace</span>
-              <span className={`absolute inset-0 bg-gradient-to-r from-nexia-orange/10 to-nexia-blue/10 
-                              transform transition-transform duration-300 group-hover:scale-105 -z-0
-                              ${isActive('/marketplace') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></span>
+              <span className={`absolute inset-0 bg-gradient-to-r from-nexia-orange to-nexia-blue 
+                              transform transition-transform duration-300 ${
+                                isActive('/marketplace') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                              }`}></span>
             </Link>
             <div className="flex flex-col gap-2 p-4">
               <Button 
