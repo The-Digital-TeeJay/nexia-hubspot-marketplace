@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, MessageCircle } from 'lucide-react';
@@ -29,7 +30,7 @@ const Header = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
           ? 'py-0.5 bg-white/95 backdrop-blur-sm' 
-          : 'py-1 bg-transparent backdrop-blur-sm'
+          : 'py-1 bg-white/0 backdrop-blur-sm'
       }`}
       style={{ boxShadow: isScrolled ? '0 1px 3px rgba(0,0,0,0.05)' : 'none' }}
     >
