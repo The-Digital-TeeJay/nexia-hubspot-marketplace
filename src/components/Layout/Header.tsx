@@ -40,27 +40,42 @@ const Header = () => {
         <nav className="hidden md:flex items-center gap-8">
           <Link 
             to="/" 
-            className={`font-medium transition-colors hover:text-nexia-orange ${
+            className={`relative group overflow-hidden font-medium transition-all duration-300 hover:text-nexia-orange ${
               isActive('/') ? 'text-nexia-orange' : 'text-foreground'
             }`}
           >
-            Home
+            <span className="relative z-10 px-4 py-2">Home</span>
+            <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange/10 to-nexia-blue/10 
+                             transform transition-transform duration-300 group-hover:scale-110 -z-0
+                             ${isActive('/') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></span>
+            <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-nexia-orange to-nexia-blue
+                           transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
           </Link>
           <Link 
             to="/blog" 
-            className={`font-medium transition-colors hover:text-nexia-orange ${
+            className={`relative group overflow-hidden font-medium transition-all duration-300 hover:text-nexia-orange ${
               isActive('/blog') ? 'text-nexia-orange' : 'text-foreground'
             }`}
           >
-            Blog
+            <span className="relative z-10 px-4 py-2">Blog</span>
+            <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange/10 to-nexia-blue/10 
+                             transform transition-transform duration-300 group-hover:scale-110 -z-0
+                             ${isActive('/blog') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></span>
+            <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-nexia-orange to-nexia-blue
+                           transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
           </Link>
           <Link 
             to="/marketplace" 
-            className={`font-medium transition-colors hover:text-nexia-orange ${
+            className={`relative group overflow-hidden font-medium transition-all duration-300 hover:text-nexia-orange ${
               isActive('/marketplace') ? 'text-nexia-orange' : 'text-foreground'
             }`}
           >
-            Marketplace
+            <span className="relative z-10 px-4 py-2">Marketplace</span>
+            <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange/10 to-nexia-blue/10 
+                             transform transition-transform duration-300 group-hover:scale-110 -z-0
+                             ${isActive('/marketplace') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></span>
+            <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-nexia-orange to-nexia-blue
+                           transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
           </Link>
           <div className="flex items-center gap-4">
             <Button 
@@ -98,27 +113,36 @@ const Header = () => {
           <div className="container flex flex-col space-y-4">
             <Link 
               to="/" 
-              className={`font-medium px-4 py-2 rounded-lg ${
-                isActive('/') ? 'bg-muted text-nexia-orange' : 'text-foreground'
+              className={`font-medium px-4 py-2 rounded-lg relative overflow-hidden group ${
+                isActive('/') ? 'bg-gradient-to-r from-nexia-orange/20 to-nexia-blue/20 text-nexia-orange' : 'text-foreground'
               }`}
             >
-              Home
+              <span className="relative z-10">Home</span>
+              <span className={`absolute inset-0 bg-gradient-to-r from-nexia-orange/10 to-nexia-blue/10 
+                              transform transition-transform duration-300 group-hover:scale-105 -z-0
+                              ${isActive('/') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></span>
             </Link>
             <Link 
               to="/blog" 
-              className={`font-medium px-4 py-2 rounded-lg ${
-                isActive('/blog') ? 'bg-muted text-nexia-orange' : 'text-foreground'
+              className={`font-medium px-4 py-2 rounded-lg relative overflow-hidden group ${
+                isActive('/blog') ? 'bg-gradient-to-r from-nexia-orange/20 to-nexia-blue/20 text-nexia-orange' : 'text-foreground'
               }`}
             >
-              Blog
+              <span className="relative z-10">Blog</span>
+              <span className={`absolute inset-0 bg-gradient-to-r from-nexia-orange/10 to-nexia-blue/10 
+                              transform transition-transform duration-300 group-hover:scale-105 -z-0
+                              ${isActive('/blog') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></span>
             </Link>
             <Link 
               to="/marketplace" 
-              className={`font-medium px-4 py-2 rounded-lg ${
-                isActive('/marketplace') ? 'bg-muted text-nexia-orange' : 'text-foreground'
+              className={`font-medium px-4 py-2 rounded-lg relative overflow-hidden group ${
+                isActive('/marketplace') ? 'bg-gradient-to-r from-nexia-orange/20 to-nexia-blue/20 text-nexia-orange' : 'text-foreground'
               }`}
             >
-              Marketplace
+              <span className="relative z-10">Marketplace</span>
+              <span className={`absolute inset-0 bg-gradient-to-r from-nexia-orange/10 to-nexia-blue/10 
+                              transform transition-transform duration-300 group-hover:scale-105 -z-0
+                              ${isActive('/marketplace') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></span>
             </Link>
             <div className="flex flex-col gap-2 p-4">
               <Button 
