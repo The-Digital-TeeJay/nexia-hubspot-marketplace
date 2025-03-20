@@ -29,14 +29,14 @@ const Header = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'py-0.5 bg-white/95 backdrop-blur-sm' 
-          : 'py-1 bg-white/0 backdrop-blur-sm'
+          ? 'py-2 bg-white/95 backdrop-blur-sm' 
+          : 'py-2 bg-white/0 backdrop-blur-sm'
       }`}
       style={{ boxShadow: isScrolled ? '0 1px 3px rgba(0,0,0,0.05)' : 'none' }}
     >
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-12">
         <Link to="/" className="flex items-center">
-          <NexiaLogo className={`${isScrolled ? 'h-32 md:h-36' : 'h-36 md:h-40'} w-auto transition-all duration-300`} />
+          <NexiaLogo className="h-36 md:h-36 w-auto" />
         </Link>
         
         {/* Desktop Navigation */}
