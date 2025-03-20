@@ -33,53 +33,58 @@ const Header = () => {
     >
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center">
-          <NexiaLogo className={`${isScrolled ? 'h-16 md:h-18' : 'h-20 md:h-24'} w-auto transition-all duration-300`} />
+          <NexiaLogo className={`${isScrolled ? 'h-40 md:h-45' : 'h-50 md:h-60'} w-auto transition-all duration-300`} />
         </Link>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link 
-            to="/" 
-            className={`relative group overflow-hidden font-medium transition-all duration-300`}
-          >
-            <span className={`relative z-10 px-6 py-3 rounded-lg block ${
-              isActive('/') ? 'text-white' : 'text-foreground hover:text-white'
-            }`}>Home</span>
-            <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange to-nexia-blue 
-                             transform transition-all duration-500 ${
-                               isActive('/') 
-                                 ? 'opacity-100' 
-                                 : 'opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100'
-                             }`}></span>
-          </Link>
-          <Link 
-            to="/blog" 
-            className={`relative group overflow-hidden font-medium transition-all duration-300`}
-          >
-            <span className={`relative z-10 px-6 py-3 rounded-lg block ${
-              isActive('/blog') ? 'text-white' : 'text-foreground hover:text-white'
-            }`}>Blog</span>
-            <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange to-nexia-blue 
-                             transform transition-all duration-500 ${
-                               isActive('/blog') 
-                                 ? 'opacity-100' 
-                                 : 'opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100'
-                             }`}></span>
-          </Link>
-          <Link 
-            to="/marketplace" 
-            className={`relative group overflow-hidden font-medium transition-all duration-300`}
-          >
-            <span className={`relative z-10 px-6 py-3 rounded-lg block ${
-              isActive('/marketplace') ? 'text-white' : 'text-foreground hover:text-white'
-            }`}>Marketplace</span>
-            <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange to-nexia-blue 
-                             transform transition-all duration-500 ${
-                               isActive('/marketplace') 
-                                 ? 'opacity-100' 
-                                 : 'opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100'
-                             }`}></span>
-          </Link>
+          <div className="flex items-center space-x-2">
+            <Link 
+              to="/" 
+              className={`relative group overflow-hidden font-medium transition-all duration-300`}
+            >
+              <span className={`relative z-10 px-6 py-3 rounded-lg inline-block ${
+                isActive('/') ? 'text-white' : 'text-foreground hover:text-white'
+              }`}>Home</span>
+              <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange to-nexia-blue 
+                              transform transition-all duration-500 ${
+                                isActive('/') 
+                                  ? 'opacity-100' 
+                                  : 'opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100'
+                              }`}></span>
+            </Link>
+            
+            <Link 
+              to="/blog" 
+              className={`relative group overflow-hidden font-medium transition-all duration-300`}
+            >
+              <span className={`relative z-10 px-6 py-3 rounded-lg inline-block ${
+                isActive('/blog') ? 'text-white' : 'text-foreground hover:text-white'
+              }`}>Blog</span>
+              <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange to-nexia-blue 
+                              transform transition-all duration-500 ${
+                                isActive('/blog') 
+                                  ? 'opacity-100' 
+                                  : 'opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100'
+                              }`}></span>
+            </Link>
+            
+            <Link 
+              to="/marketplace" 
+              className={`relative group overflow-hidden font-medium transition-all duration-300`}
+            >
+              <span className={`relative z-10 px-6 py-3 rounded-lg inline-block ${
+                isActive('/marketplace') ? 'text-white' : 'text-foreground hover:text-white'
+              }`}>Marketplace</span>
+              <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange to-nexia-blue 
+                              transform transition-all duration-500 ${
+                                isActive('/marketplace') 
+                                  ? 'opacity-100' 
+                                  : 'opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100'
+                              }`}></span>
+            </Link>
+          </div>
+          
           <div className="flex items-center gap-4">
             <Button 
               variant="ghost"
