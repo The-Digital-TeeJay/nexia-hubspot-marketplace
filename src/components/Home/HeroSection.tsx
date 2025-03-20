@@ -613,41 +613,42 @@ const HeroSection = () => {
                 transform: `translateY(${-scrollY * 0.1}px)` // Reverse parallax effect for floating
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-nexia-orange/10 to-nexia-blue/10 rounded-2xl -z-10"></div>
+              {/* Updated background with more harmonious gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-nexia-orange/30 to-white/60 rounded-2xl -z-10"></div>
               
               <div className="space-y-4 md:space-y-8">
-                <div className="p-4 md:p-8 rounded-xl bg-transparent shadow-sm hover:shadow-md transition-all">
+                <div className="p-4 md:p-8 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-sm hover:shadow-md transition-all">
                   <div className="flex items-center space-x-4 md:space-x-6">
                     <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-orange/10 flex items-center justify-center">
                       <Bot className="h-6 w-6 md:h-8 md:w-8 text-nexia-orange" />
                     </div>
                     <div>
-                      <h4 className={`font-medium text-lg md:text-xl ${isMobile ? 'text-white' : ''}`}>Assistente IA</h4>
-                      <p className={`text-sm md:text-base ${isMobile ? 'text-white/90' : 'text-muted-foreground'}`}>Automação inteligente com aprendizado contínuo</p>
+                      <h4 className="font-medium text-lg md:text-xl text-foreground">Assistente IA</h4>
+                      <p className="text-sm md:text-base text-muted-foreground">Automação inteligente com aprendizado contínuo</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="p-4 md:p-8 rounded-xl bg-transparent shadow-sm hover:shadow-md transition-all">
+                <div className="p-4 md:p-8 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-sm hover:shadow-md transition-all">
                   <div className="flex items-center space-x-4 md:space-x-6">
                     <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-blue/10 flex items-center justify-center">
                       <Zap className="h-6 w-6 md:h-8 md:w-8 text-nexia-blue" />
                     </div>
                     <div>
-                      <h4 className={`font-medium text-lg md:text-xl ${isMobile ? 'text-white' : ''}`}>Workflow Otimizado</h4>
-                      <p className={`text-sm md:text-base ${isMobile ? 'text-white/90' : 'text-muted-foreground'}`}>Processos eficientes e personalizados</p>
+                      <h4 className="font-medium text-lg md:text-xl text-foreground">Workflow Otimizado</h4>
+                      <p className="text-sm md:text-base text-muted-foreground">Processos eficientes e personalizados</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="p-4 md:p-8 rounded-xl bg-transparent shadow-sm hover:shadow-md transition-all">
+                <div className="p-4 md:p-8 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 shadow-sm hover:shadow-md transition-all">
                   <div className="flex items-center space-x-4 md:space-x-6">
                     <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-orange/10 flex items-center justify-center">
                       <BarChart className="h-6 w-6 md:h-8 md:w-8 text-nexia-orange" />
                     </div>
                     <div>
-                      <h4 className={`font-medium text-lg md:text-xl ${isMobile ? 'text-white' : ''}`}>Análise de Dados</h4>
-                      <p className={`text-sm md:text-base ${isMobile ? 'text-white/90' : 'text-muted-foreground'}`}>Insights valiosos e métricas precisas</p>
+                      <h4 className="font-medium text-lg md:text-xl text-foreground">Análise de Dados</h4>
+                      <p className="text-sm md:text-base text-muted-foreground">Insights valiosos e métricas precisas</p>
                     </div>
                   </div>
                 </div>
