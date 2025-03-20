@@ -1,10 +1,12 @@
 import { ArrowRight, Bot, Zap, BarChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useEffect, useRef, useState } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const HeroSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [scrollY, setScrollY] = useState(0);
+  const isMobile = useIsMobile();
 
   // Track scroll position for parallax effect
   useEffect(() => {
@@ -36,6 +38,9 @@ const HeroSection = () => {
     
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
+
+    // Get current screen width for mobile layout adjustments
+    const isMobileView = window.innerWidth < 768;
 
     // Workflow node class
     class WorkflowNode {
@@ -373,91 +378,137 @@ const HeroSection = () => {
       connector: '#64748B'     // Slate
     };
     
-    // Create an expanded network of nodes in multiple branches with more nodes
-    const nodes: WorkflowNode[] = [
-      // Main trigger and initial branches
-      new WorkflowNode(50, 120, 140, 70, nodeColors.trigger, 'Evento Inicial', 'trigger'),
-      new WorkflowNode(250, 50, 140, 70, nodeColors.function, 'Validar Dados', 'function'),
-      new WorkflowNode(250, 180, 140, 70, nodeColors.api, 'API Request', 'api'),
+    // Create nodes with adjusted positioning for mobile
+    // For mobile: Create more vertical layout with nodes stacked
+    let nodes: WorkflowNode[] = [];
+    
+    if (isMobileView) {
+      // Mobile layout - vertical arrangement
+      nodes = [
+        // Main flow - vertical orientation
+        new WorkflowNode(50, 50, 100, 60, nodeColors.trigger, 'Início', 'trigger'),
+        new WorkflowNode(50, 150, 100, 60, nodeColors.function, 'Validar', 'function'),
+        new WorkflowNode(50, 250, 100, 60, nodeColors.api, 'API', 'api'),
+        new WorkflowNode(50, 350, 100, 60, nodeColors.filter, 'Filtrar', 'filter'),
+        
+        // Second column
+        new WorkflowNode(200, 100, 100, 60, nodeColors.data, 'Dados', 'data'),
+        new WorkflowNode(200, 200, 100, 60, nodeColors.transformer, 'Transform', 'transformer'),
+        new WorkflowNode(200, 300, 100, 60, nodeColors.function, 'Análise', 'function'),
+        
+        // Third column
+        new WorkflowNode(350, 150, 100, 60, nodeColors.notification, 'Alertas', 'notification'),
+        new WorkflowNode(350, 250, 100, 60, nodeColors.function, 'Integrar', 'function'),
+        new WorkflowNode(350, 350, 100, 60, nodeColors.data, 'Armazenar', 'data'),
+      ];
       
-      // Top branch nodes
-      new WorkflowNode(450, 20, 140, 70, nodeColors.filter, 'Filtrar Dados', 'filter'),
-      new WorkflowNode(450, 120, 140, 70, nodeColors.data, 'Banco de Dados', 'data'),
+      // Vertical connections
+      nodes[0].connect(nodes[1]); // Início -> Validar
+      nodes[1].connect(nodes[2]); // Validar -> API
+      nodes[2].connect(nodes[3]); // API -> Filtrar
       
-      // Middle branch nodes
-      new WorkflowNode(450, 220, 140, 70, nodeColors.transformer, 'Transformar', 'transformer'),
-      new WorkflowNode(650, 70, 140, 70, nodeColors.function, 'Análise', 'function'),
+      // Cross connections
+      nodes[0].connect(nodes[4]); // Início -> Dados
+      nodes[1].connect(nodes[5]); // Validar -> Transform
+      nodes[2].connect(nodes[6]); // API -> Análise
       
-      // Bottom branch nodes
-      new WorkflowNode(650, 170, 140, 70, nodeColors.notification, 'Notificação', 'notification'),
-      new WorkflowNode(650, 270, 140, 70, nodeColors.api, 'Webhook', 'api'),
+      // Second to third column
+      nodes[4].connect(nodes[7]); // Dados -> Alertas
+      nodes[5].connect(nodes[8]); // Transform -> Integrar
+      nodes[6].connect(nodes[9]); // Análise -> Armazenar
       
-      // Final integration nodes
-      new WorkflowNode(850, 120, 140, 70, nodeColors.function, 'Integração', 'function'),
-      new WorkflowNode(850, 220, 140, 70, nodeColors.data, 'Armazenar', 'data'),
+      // Cross connections between columns
+      nodes[3].connect(nodes[6]); // Filtrar -> Análise
+      nodes[5].connect(nodes[7]); // Transform -> Alertas
+      nodes[7].connect(nodes[8]); // Alertas -> Integrar
+      nodes[8].connect(nodes[9]); // Integrar -> Armazenar
+    } else {
+      // Desktop layout - keep existing horizontal layout
+      nodes = [
+        // Main trigger and initial branches
+        new WorkflowNode(50, 120, 140, 70, nodeColors.trigger, 'Evento Inicial', 'trigger'),
+        new WorkflowNode(250, 50, 140, 70, nodeColors.function, 'Validar Dados', 'function'),
+        new WorkflowNode(250, 180, 140, 70, nodeColors.api, 'API Request', 'api'),
+        
+        // Top branch nodes
+        new WorkflowNode(450, 20, 140, 70, nodeColors.filter, 'Filtrar Dados', 'filter'),
+        new WorkflowNode(450, 120, 140, 70, nodeColors.data, 'Banco de Dados', 'data'),
+        
+        // Middle branch nodes
+        new WorkflowNode(450, 220, 140, 70, nodeColors.transformer, 'Transformar', 'transformer'),
+        new WorkflowNode(650, 70, 140, 70, nodeColors.function, 'Análise', 'function'),
+        
+        // Bottom branch nodes
+        new WorkflowNode(650, 170, 140, 70, nodeColors.notification, 'Notificação', 'notification'),
+        new WorkflowNode(650, 270, 140, 70, nodeColors.api, 'Webhook', 'api'),
+        
+        // Final integration nodes
+        new WorkflowNode(850, 120, 140, 70, nodeColors.function, 'Integração', 'function'),
+        new WorkflowNode(850, 220, 140, 70, nodeColors.data, 'Armazenar', 'data'),
+        
+        // Extended branches going down
+        new WorkflowNode(450, 320, 140, 70, nodeColors.connector, 'Conectar API', 'api'),
+        new WorkflowNode(450, 420, 140, 70, nodeColors.function, 'Processar JSON', 'function'),
+        new WorkflowNode(650, 370, 140, 70, nodeColors.data, 'Armazenar Cache', 'data'),
+        new WorkflowNode(850, 320, 140, 70, nodeColors.transformer, 'Transformar Dados', 'transformer'),
+        new WorkflowNode(850, 420, 140, 70, nodeColors.notification, 'Alerta', 'notification'),
+        
+        // Deep-level processing branch
+        new WorkflowNode(250, 320, 140, 70, nodeColors.filter, 'Filtrar Erros', 'filter'),
+        new WorkflowNode(250, 420, 140, 70, nodeColors.function, 'Correção Auto', 'function'),
+        new WorkflowNode(50, 370, 140, 70, nodeColors.api, 'Chamar IA', 'api'),
+        
+        // Bottom level integration
+        new WorkflowNode(650, 470, 140, 70, nodeColors.function, 'Análise Final', 'function'),
+        new WorkflowNode(850, 520, 140, 70, nodeColors.data, 'Relatório', 'data'),
+        new WorkflowNode(450, 520, 140, 70, nodeColors.notification, 'Notificação Email', 'notification'),
+        new WorkflowNode(250, 520, 140, 70, nodeColors.api, 'Webhook Final', 'api')
+      ];
       
-      // NEW: Extended branches going down
-      new WorkflowNode(450, 320, 140, 70, nodeColors.connector, 'Conectar API', 'api'),
-      new WorkflowNode(450, 420, 140, 70, nodeColors.function, 'Processar JSON', 'function'),
-      new WorkflowNode(650, 370, 140, 70, nodeColors.data, 'Armazenar Cache', 'data'),
-      new WorkflowNode(850, 320, 140, 70, nodeColors.transformer, 'Transformar Dados', 'transformer'),
-      new WorkflowNode(850, 420, 140, 70, nodeColors.notification, 'Alerta', 'notification'),
+      // Create desktop connections - keep existing connections
+      // Initial connections
+      nodes[0].connect(nodes[1]); // Trigger -> Validate
+      nodes[0].connect(nodes[2]); // Trigger -> API Request
       
-      // NEW: Deep-level processing branch
-      new WorkflowNode(250, 320, 140, 70, nodeColors.filter, 'Filtrar Erros', 'filter'),
-      new WorkflowNode(250, 420, 140, 70, nodeColors.function, 'Correção Auto', 'function'),
-      new WorkflowNode(50, 370, 140, 70, nodeColors.api, 'Chamar IA', 'api'),
+      // Top branch
+      nodes[1].connect(nodes[3]); // Validate -> Filter
+      nodes[1].connect(nodes[4]); // Validate -> Database
       
-      // NEW: Bottom level integration
-      new WorkflowNode(650, 470, 140, 70, nodeColors.function, 'Análise Final', 'function'),
-      new WorkflowNode(850, 520, 140, 70, nodeColors.data, 'Relatório', 'data'),
-      new WorkflowNode(450, 520, 140, 70, nodeColors.notification, 'Notificação Email', 'notification'),
-      new WorkflowNode(250, 520, 140, 70, nodeColors.api, 'Webhook Final', 'api')
-    ];
-    
-    // Create a more complex network of connections
-    // Initial connections
-    nodes[0].connect(nodes[1]); // Trigger -> Validate
-    nodes[0].connect(nodes[2]); // Trigger -> API Request
-    
-    // Top branch
-    nodes[1].connect(nodes[3]); // Validate -> Filter
-    nodes[1].connect(nodes[4]); // Validate -> Database
-    
-    // Middle branch
-    nodes[2].connect(nodes[5]); // API Request -> Transform
-    nodes[3].connect(nodes[6]); // Filter -> Analysis
-    nodes[4].connect(nodes[6]); // Database -> Analysis
-    
-    // Bottom branch
-    nodes[5].connect(nodes[7]); // Transform -> Notification
-    nodes[5].connect(nodes[8]); // Transform -> Webhook
-    
-    // Final integration
-    nodes[6].connect(nodes[9]); // Analysis -> Integration
-    nodes[7].connect(nodes[9]); // Notification -> Integration
-    nodes[8].connect(nodes[10]); // Webhook -> Store
-    nodes[9].connect(nodes[10]); // Integration -> Store
-    
-    // NEW: Additional connections for extended workflow
-    nodes[5].connect(nodes[11]); // Transform -> Connect API
-    nodes[11].connect(nodes[12]); // Connect API -> Process JSON
-    nodes[12].connect(nodes[13]); // Process JSON -> Store Cache
-    nodes[13].connect(nodes[14]); // Store Cache -> Transform Data
-    nodes[14].connect(nodes[15]); // Transform Data -> Alert
-    
-    // NEW: Connections for deep-level processing branch
-    nodes[2].connect(nodes[16]); // API Request -> Filter Errors
-    nodes[16].connect(nodes[17]); // Filter Errors -> Auto Fix
-    nodes[17].connect(nodes[18]); // Auto Fix -> Call AI
-    
-    // NEW: More complex integrations
-    nodes[15].connect(nodes[19]); // Alert -> Final Analysis
-    nodes[19].connect(nodes[20]); // Final Analysis -> Report
-    nodes[14].connect(nodes[21]); // Transform Data -> Email Notification
-    nodes[21].connect(nodes[22]); // Email Notification -> Final Webhook
-    nodes[18].connect(nodes[22]); // Call AI -> Final Webhook
-    nodes[17].connect(nodes[12]); // Auto Fix -> Process JSON (creating a loop)
+      // Middle branch
+      nodes[2].connect(nodes[5]); // API Request -> Transform
+      nodes[3].connect(nodes[6]); // Filter -> Analysis
+      nodes[4].connect(nodes[6]); // Database -> Analysis
+      
+      // Bottom branch
+      nodes[5].connect(nodes[7]); // Transform -> Notification
+      nodes[5].connect(nodes[8]); // Transform -> Webhook
+      
+      // Final integration
+      nodes[6].connect(nodes[9]); // Analysis -> Integration
+      nodes[7].connect(nodes[9]); // Notification -> Integration
+      nodes[8].connect(nodes[10]); // Webhook -> Store
+      nodes[9].connect(nodes[10]); // Integration -> Store
+      
+      // NEW: Additional connections for extended workflow
+      nodes[5].connect(nodes[11]); // Transform -> Connect API
+      nodes[11].connect(nodes[12]); // Connect API -> Process JSON
+      nodes[12].connect(nodes[13]); // Process JSON -> Store Cache
+      nodes[13].connect(nodes[14]); // Store Cache -> Transform Data
+      nodes[14].connect(nodes[15]); // Transform Data -> Alert
+      
+      // NEW: Connections for deep-level processing branch
+      nodes[2].connect(nodes[16]); // API Request -> Filter Errors
+      nodes[16].connect(nodes[17]); // Filter Errors -> Auto Fix
+      nodes[17].connect(nodes[18]); // Auto Fix -> Call AI
+      
+      // NEW: More complex integrations
+      nodes[15].connect(nodes[19]); // Alert -> Final Analysis
+      nodes[19].connect(nodes[20]); // Final Analysis -> Report
+      nodes[14].connect(nodes[21]); // Transform Data -> Email Notification
+      nodes[21].connect(nodes[22]); // Email Notification -> Final Webhook
+      nodes[18].connect(nodes[22]); // Call AI -> Final Webhook
+      nodes[17].connect(nodes[12]); // Auto Fix -> Process JSON (creating a loop)
+    }
     
     // Start animation with trigger node
     nodes[0].activate();
@@ -495,7 +546,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden pt-24 md:pt-32 pb-16 md:pb-24">
+    <section className="relative overflow-hidden pt-20 md:pt-32 pb-16 md:pb-24">
       {/* Canvas for n8n workflow animation */}
       <canvas 
         ref={canvasRef} 
@@ -513,90 +564,90 @@ const HeroSection = () => {
       <div className="absolute bottom-20 left-[5%] w-72 h-72 bg-nexia-blue/10 rounded-full blur-3xl animate-pulse-slow -z-10" />
       
       <div className="container max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="fade-in-stagger space-y-6 max-w-2xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div className="fade-in-stagger space-y-4 md:space-y-6 max-w-2xl">
             <div className="inline-flex items-center rounded-full bg-nexia-blue/10 px-3 py-1 text-sm font-medium text-nexia-blue">
               <span className="animate-pulse mr-1">●</span> Impulsionando a automação com IA
             </div>
-            <h1 className="font-bold tracking-tight">
+            <h1 className="font-bold tracking-tight text-2xl md:text-4xl">
               Automatize com <span className="hero-text-gradient">Inteligência</span> e <span className="hero-text-gradient">Precisão</span>
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base md:text-lg text-muted-foreground">
               A Nexia transforma processos complexos em fluxos automatizados e inteligentes. 
               Nossa tecnologia de ponta combina IA com automação para criar soluções que economizam
               tempo, reduzem erros e potencializam resultados.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button size="lg" className="button-with-glow bg-gradient-to-r from-nexia-orange to-nexia-blue text-white rounded-full px-8 shadow-lg hover:shadow-xl transition-all">
+            <div className="flex flex-col sm:flex-row gap-4 pt-2 md:pt-4">
+              <Button size={isMobile ? "default" : "lg"} className="button-with-glow bg-gradient-to-r from-nexia-orange to-nexia-blue text-white rounded-full px-6 md:px-8 shadow-lg hover:shadow-xl transition-all">
                 Começar Agora
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
               </Button>
-              <Button size="lg" variant="outline" className="bg-white/80 backdrop-blur-sm hover:bg-white border-nexia-blue/20 text-foreground rounded-full px-8">
+              <Button size={isMobile ? "default" : "lg"} variant="outline" className="bg-transparent backdrop-blur-sm hover:bg-white/30 border-nexia-blue/20 text-foreground rounded-full px-6 md:px-8">
                 Saber Mais
               </Button>
             </div>
             
-            <div className="grid grid-cols-3 gap-4 pt-6">
+            <div className="grid grid-cols-3 gap-2 md:gap-4 pt-4 md:pt-6">
               <div className="text-center">
-                <div className="font-bold text-3xl text-nexia-blue">98%</div>
-                <p className="text-sm text-muted-foreground">Precisão</p>
+                <div className="font-bold text-xl md:text-3xl text-nexia-blue">98%</div>
+                <p className="text-xs md:text-sm text-muted-foreground">Precisão</p>
               </div>
               <div className="text-center">
-                <div className="font-bold text-3xl text-nexia-blue">500+</div>
-                <p className="text-sm text-muted-foreground">Clientes</p>
+                <div className="font-bold text-xl md:text-3xl text-nexia-blue">500+</div>
+                <p className="text-xs md:text-sm text-muted-foreground">Clientes</p>
               </div>
               <div className="text-center">
-                <div className="font-bold text-3xl text-nexia-blue">85%</div>
-                <p className="text-sm text-muted-foreground">Economia</p>
+                <div className="font-bold text-xl md:text-3xl text-nexia-blue">85%</div>
+                <p className="text-xs md:text-sm text-muted-foreground">Economia</p>
               </div>
             </div>
           </div>
           
           <div className="relative flex justify-center items-center w-full">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-nexia-orange to-nexia-blue rounded-full opacity-20 blur-3xl animate-pulse-slow"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 md:w-96 h-64 md:h-96 bg-gradient-to-br from-nexia-orange to-nexia-blue rounded-full opacity-20 blur-3xl animate-pulse-slow"></div>
             
             {/* Feature cards - centered and with parallax effect */}
             <div 
-              className="relative glass-card p-10 w-[85%] mx-auto animate-float"
+              className="relative w-[95%] md:w-[85%] mx-auto animate-float"
               style={{ 
                 transform: `translateY(${-scrollY * 0.1}px)` // Reverse parallax effect for floating
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-nexia-orange/10 to-nexia-blue/10 rounded-2xl -z-10"></div>
               
-              <div className="space-y-8">
-                <div className="p-8 rounded-xl bg-white/70 shadow-sm hover:shadow-md transition-all">
-                  <div className="flex items-center space-x-6">
-                    <div className="w-16 h-16 rounded-full bg-nexia-orange/10 flex items-center justify-center">
-                      <Bot className="h-8 w-8 text-nexia-orange" />
+              <div className="space-y-4 md:space-y-8">
+                <div className="p-4 md:p-8 rounded-xl bg-transparent shadow-sm hover:shadow-md transition-all">
+                  <div className="flex items-center space-x-4 md:space-x-6">
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-orange/10 flex items-center justify-center">
+                      <Bot className="h-6 w-6 md:h-8 md:w-8 text-nexia-orange" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-xl">Assistente IA</h4>
-                      <p className="text-muted-foreground">Automação inteligente com aprendizado contínuo</p>
+                      <h4 className="font-medium text-lg md:text-xl">Assistente IA</h4>
+                      <p className="text-sm md:text-base text-muted-foreground">Automação inteligente com aprendizado contínuo</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="p-8 rounded-xl bg-white/70 shadow-sm hover:shadow-md transition-all">
-                  <div className="flex items-center space-x-6">
-                    <div className="w-16 h-16 rounded-full bg-nexia-blue/10 flex items-center justify-center">
-                      <Zap className="h-8 w-8 text-nexia-blue" />
+                <div className="p-4 md:p-8 rounded-xl bg-transparent shadow-sm hover:shadow-md transition-all">
+                  <div className="flex items-center space-x-4 md:space-x-6">
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-blue/10 flex items-center justify-center">
+                      <Zap className="h-6 w-6 md:h-8 md:w-8 text-nexia-blue" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-xl">Workflow Otimizado</h4>
-                      <p className="text-muted-foreground">Processos eficientes e personalizados</p>
+                      <h4 className="font-medium text-lg md:text-xl">Workflow Otimizado</h4>
+                      <p className="text-sm md:text-base text-muted-foreground">Processos eficientes e personalizados</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="p-8 rounded-xl bg-white/70 shadow-sm hover:shadow-md transition-all">
-                  <div className="flex items-center space-x-6">
-                    <div className="w-16 h-16 rounded-full bg-nexia-orange/10 flex items-center justify-center">
-                      <BarChart className="h-8 w-8 text-nexia-orange" />
+                <div className="p-4 md:p-8 rounded-xl bg-transparent shadow-sm hover:shadow-md transition-all">
+                  <div className="flex items-center space-x-4 md:space-x-6">
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-nexia-orange/10 flex items-center justify-center">
+                      <BarChart className="h-6 w-6 md:h-8 md:w-8 text-nexia-orange" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-xl">Análise de Dados</h4>
-                      <p className="text-muted-foreground">Insights valiosos e métricas precisas</p>
+                      <h4 className="font-medium text-lg md:text-xl">Análise de Dados</h4>
+                      <p className="text-sm md:text-base text-muted-foreground">Insights valiosos e métricas precisas</p>
                     </div>
                   </div>
                 </div>
