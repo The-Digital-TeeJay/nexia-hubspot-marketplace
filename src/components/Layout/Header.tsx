@@ -28,7 +28,7 @@ const Header = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'py-2 bg-white/90 backdrop-blur-md shadow-sm' : 'py-3 bg-transparent'
+        isScrolled ? 'py-1 bg-white/90 backdrop-blur-md shadow-sm' : 'py-2 bg-transparent'
       }`}
     >
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
@@ -41,9 +41,9 @@ const Header = () => {
           <div className="flex items-center space-x-2">
             <Link 
               to="/" 
-              className={`relative group overflow-hidden font-medium transition-all duration-300`}
+              className="relative group overflow-hidden font-medium transition-all duration-300"
             >
-              <span className={`relative z-10 px-6 py-3 rounded-lg inline-block ${
+              <span className={`relative z-10 px-6 py-2 rounded-lg inline-block ${
                 isActive('/') ? 'text-white' : 'text-foreground hover:text-white'
               }`}>Home</span>
               <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange to-nexia-blue 
@@ -56,9 +56,9 @@ const Header = () => {
             
             <Link 
               to="/blog" 
-              className={`relative group overflow-hidden font-medium transition-all duration-300`}
+              className="relative group overflow-hidden font-medium transition-all duration-300"
             >
-              <span className={`relative z-10 px-6 py-3 rounded-lg inline-block ${
+              <span className={`relative z-10 px-6 py-2 rounded-lg inline-block ${
                 isActive('/blog') ? 'text-white' : 'text-foreground hover:text-white'
               }`}>Blog</span>
               <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange to-nexia-blue 
@@ -71,9 +71,9 @@ const Header = () => {
             
             <Link 
               to="/marketplace" 
-              className={`relative group overflow-hidden font-medium transition-all duration-300`}
+              className="relative group overflow-hidden font-medium transition-all duration-300"
             >
-              <span className={`relative z-10 px-6 py-3 rounded-lg inline-block ${
+              <span className={`relative z-10 px-6 py-2 rounded-lg inline-block ${
                 isActive('/marketplace') ? 'text-white' : 'text-foreground hover:text-white'
               }`}>Marketplace</span>
               <span className={`absolute inset-0 rounded-lg bg-gradient-to-r from-nexia-orange to-nexia-blue 
